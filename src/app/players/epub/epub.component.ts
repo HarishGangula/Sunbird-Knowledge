@@ -37,7 +37,7 @@ export class EpubComponent implements OnInit {
     this.getContentDetails().pipe(first(),
       tap((data: any) => {
         if (this.contentDetails){
-          this.loadContent(this.contentDetails);
+          this.loadContent();
         }else{
           this.loadDefaultData();
         }
@@ -58,9 +58,10 @@ export class EpubComponent implements OnInit {
     this.playerConfig = {
       context: this.context,
       config: this.config,
-      metadata: this.configService.playerConfig.EPUB_PLAYER.metadata
+      metadata: this.configService.playerConfig.EPUB_PLAYER_METADATA
     } ;
   }
+
   private getContentDetails() {
     if (this.queryParams.identifier) {
       const options: any = { params: { fields: 'mimeType,name,artifactUrl' } };
@@ -76,7 +77,7 @@ export class EpubComponent implements OnInit {
     }
   }
 
-  loadContent(metadata) {
+  loadContent() {
     this.playerConfig = {
       context: this.context,
       config: this.config,
