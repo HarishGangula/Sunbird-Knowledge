@@ -21,13 +21,17 @@ export class PdfComponent implements OnInit {
   public contentDetails: any;
   playerConfig = this.configService.playerConfig.PDF_PLAYER;
   isLoading = true;
+  context =  this.configService.playerConfig.PLAYER_CONTEXT;
+  config = {};
 
   ngOnInit(): void {
     this.queryParams = this.activatedRoute.snapshot.queryParams;
     this.getContentDetails().pipe(first(),
       tap((data: any) => {
         if (this.contentDetails){
-          this.loadContent(this.contentDetails);
+          this.loadContent();
+        }else{
+          this.loadDefaultData();
         }
       }))
       .subscribe((data) => {
@@ -39,6 +43,14 @@ export class PdfComponent implements OnInit {
           console.log('error --->', error);
         }
       );
+  }
+
+  loadDefaultData(){
+    this.playerConfig = {
+      context: this.context,
+      config: this.config,
+      metadata: this.configService.playerConfig.PDF_PLAYER_METADATA
+    } ;
   }
 
   private getContentDetails() {
@@ -56,14 +68,12 @@ export class PdfComponent implements OnInit {
     }
   }
 
-  loadContent(metadata) {
-    const config = this.playerConfig;
-    this.playerConfig = undefined;
-    this.isLoading = true;
-    setTimeout(() => {
-      this.playerConfig = {...config, metadata};
-      this.isLoading = false;
-    }, 3000);
+  loadContent() {
+    this.playerConfig = {
+      context: this.context,
+      config: this.config,
+      metadata: this.contentDetails
+    };
   }
 
   playerEvents(event) {
