@@ -40,6 +40,7 @@ export class PdfComponent implements OnInit {
         (error) => {
           this.isLoading = false;
           alert('Error to load pdf, Loading default pdf');
+          this.loadDefaultData();
           console.log('error --->', error);
         }
       );

@@ -59,6 +59,7 @@ export class VideoComponent implements OnInit {
         (error) => {
           this.isLoading = false;
           alert('Error to load video, Loading default video');
+          this.loadDefaultData();
           console.log('error --->', error);
         }
       );

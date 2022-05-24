@@ -26,35 +26,57 @@
     }
   },
   "PDF_PLAYER_METADATA": {
-    "compatibilityLevel": 4,
-    "artifactUrl": "https://ntpproductionall.blob.core.windows.net/ntp-content-production/content/assets/do_31291455031832576019477/b301b302_std_1_tamilenglish_lang_term-1_opt.pdf",
-    "contentType": "FocusSpot",
-    "identifier": "do_31291455031832576019477",
-    "audience": ["Teacher"],
+    "copyright": "2022",
+    "subject": [
+        "English"
+    ],
+    "channel": "01309282781705830427",
+    "language": [
+        "English"
+    ],
+    "mimeType": "application/pdf",
+    "objectType": "Content",
+    "appIcon": "",
+    "primaryCategory": "eTextbook",
+    "artifactUrl": "https://sunbirddev.blob.core.windows.net/sunbird-content-dev/content/do_113489952498253824111/artifact/sunbird-content-dockcontentassetsdo_113489952498253824111sample.pdf",
+    "contentType": "eTextBook",
+    "identifier": "do_113489952498253824111",
+    "audience": [
+        "Student"
+    ],
     "visibility": "Default",
+    "author": "N118",
     "mediaType": "content",
     "osId": "org.ekstep.quiz.app",
-    "languageCode": ["en"],
+    "languageCode": [
+        "en"
+    ],
     "license": "CC BY 4.0",
-    "name": "B301,ENGLISH_LANG_TERM 1_OPT",
+    "name": "sample pdf",
     "status": "Live",
-    "code": "43e68089-997e-49a4-902a-6262e5654515",
-    "description": "epdf",
-    "streamingUrl": "https://ntpproductionall.blob.core.windows.net/ntp-content-production/content/assets/do_31291458881611366418883/b331332333_std_5_mathssciencesocial_tm_term-1_opt.pdf",
-    "createdOn": "2019-12-16T07:59:53.154+0000",
-    "copyrightYear": 2019,
-    "additionalCategories": ["Focus Spot"],
-    "lastUpdatedOn": "2019-12-16T11:52:56.405+0000",
-    "creator": "SCERT 2 ECONTENTS",
+    "code": "0b6e1d2c-a6de-dfa5-bdd3-d0cb495f3632",
+    "interceptionPoints": {},
+    "description": "sample pdf",
+    "streamingUrl": "https://sunbirddev.blob.core.windows.net/sunbird-content-dev/content/do_113489952498253824111/artifact/sunbird-content-dockcontentassetsdo_113489952498253824111sample.pdf",
+    "createdOn": "2022-03-08T07:25:59.731+0000",
+    "lastUpdatedOn": "2022-03-08T07:26:05.835+0000",
+    "originData": {
+        "identifier": "do_113489952498253824111",
+        "repository": "https://dock.sunbirded.org/api/content/v1/read/do_113489952498253824111"
+    },
+    "creator": "N118",
     "pkgVersion": 1,
-    "versionKey": "1576497176405",
-    "framework": "tn_k-12_5",
-    "createdBy": "f4f80b17-8609-44b9-b781-b79df5cf7e8d",
-    "resourceType": "Read",
+    "versionKey": "1646724363361",
+    "framework": "nit_k-12",
+    "createdBy": "b6640bfe-e294-4a54-8c75-589472324624",
+    "orgDetails": {
+        "email": null,
+        "orgName": "NIT"
+    },
     "licenseDetails": {
-      "name": "CC BY 4.0",
-      "url": "https://creativecommons.org/licenses/by/4.0/legalcode",
-      "description": "For details see below:"
+        "name": "CC BY 4.0",
+        "url": "https://creativecommons.org/licenses/by/4.0/legalcode",
+        "description": "This license is Creative Commons Attribution"
     }
   },
   "EPUB_PLAYER_METADATA":{
