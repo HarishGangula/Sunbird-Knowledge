@@ -30,7 +30,8 @@ export class VideoComponent implements OnInit {
       }
     }, ...this.videoMetaDataconfig
   };
-  playerConfig = this.configService.playerConfig.VIDEO_PLAYER;
+  playerConfig: any;
+  context =  this.configService.playerConfig.PLAYER_CONTEXT;
   isLoading = true;
   public queryParams: any;
   public contentDetails: any;
@@ -43,12 +44,13 @@ export class VideoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.playerConfig.config = this.config;
   this.queryParams = this.activatedRoute.snapshot.queryParams;
   this.getContentDetails().pipe(first(),
       tap((data: any) => {
         if (this.contentDetails){
-          this.loadContent(this.contentDetails);
+          this.loadContent();
+        }else{
+          this.loadDefaultData();
         }
       }))
       .subscribe((data) => {
@@ -60,6 +62,14 @@ export class VideoComponent implements OnInit {
           console.log('error --->', error);
         }
       );
+  }
+
+  loadDefaultData(){
+    this.playerConfig = {
+      context: this.context,
+      config: this.config,
+      metadata: this.configService.playerConfig.VIDEO_PLAYER_METADATA
+    } ;
   }
 
   private getContentDetails() {
@@ -77,14 +87,12 @@ export class VideoComponent implements OnInit {
     }
   }
 
-  loadContent(metadata) {
-    const config = this.playerConfig;
-    this.playerConfig = undefined;
-    this.isLoading = true;
-    setTimeout(() => {
-      this.playerConfig = {...config, metadata};
-      this.isLoading = false;
-    }, 3000);
+  loadContent() {
+    this.playerConfig = {
+      context: this.context,
+      config: this.config,
+      metadata: this.contentDetails
+    };
   }
 }
 

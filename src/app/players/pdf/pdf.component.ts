@@ -19,7 +19,7 @@ export class PdfComponent implements OnInit {
   @ViewChild('preview', { static: false }) previewElement: ElementRef;
   public queryParams: any;
   public contentDetails: any;
-  playerConfig = this.configService.playerConfig.PDF_PLAYER;
+  playerConfig: any;
   isLoading = true;
   context =  this.configService.playerConfig.PLAYER_CONTEXT;
   config = {};
