@@ -19,17 +19,7 @@ export class VideoComponent implements OnInit {
   ) { }
 
   videoMetaDataconfig: any = JSON.parse(localStorage.getItem('config')) || {};
-  config = {
-    ...{
-      traceId: 'afhjgh',
-      sideMenu: {
-        showShare: true,
-        showDownload: true,
-        showReplay: true,
-        showExit: true
-      }
-    }, ...this.videoMetaDataconfig
-  };
+  config: any;
   playerConfig: any;
   context =  this.configService.playerConfig.PLAYER_CONTEXT;
   isLoading = true;
@@ -45,6 +35,7 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {
   this.queryParams = this.activatedRoute.snapshot.queryParams;
+  this.setConfig();
   this.getContentDetails().pipe(first(),
       tap((data: any) => {
         if (this.contentDetails){
@@ -86,6 +77,21 @@ export class VideoComponent implements OnInit {
     } else {
       return of({});
     }
+  }
+
+  setConfig(){
+    this.config = {
+      ...{
+        traceId: 'afhjgh',
+        sideMenu: {
+          showShare: this.queryParams.showShare && this.queryParams.showShare === 'false' ? false : true,
+          showDownload: this.queryParams.showDownload && this.queryParams.showDownload === 'false' ? false : true,
+          showReplay: this.queryParams.showReplay && this.queryParams.showReplay === 'false' ? false : true,
+          showExit: this.queryParams.showExit && this.queryParams.showExit === 'false' ? false : true,
+          showPrint: this.queryParams.showPrint && this.queryParams.showPrint === 'false' ? false : true,
+        }
+      }, ...this.videoMetaDataconfig
+    };
   }
 
   loadContent() {

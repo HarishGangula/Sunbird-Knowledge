@@ -20,8 +20,48 @@ export class InteractivePlayerComponent implements OnInit {
   value: any;
   public queryParams: any;
   public contentDetails: any;
-  playerConfig = this.configService.playerConfig.INTERACTIVE_PLAYER;
+  playerConfig: any;
   isLoading = true;
+  config =  {
+    showEndPage: false,
+    endPage: [
+      {
+        template: 'assessment',
+        contentType: ['SelfAssess']
+      }
+    ],
+    showStartPage: true,
+    host: '',
+    overlay: {
+      showUser: false
+    },
+    splash: {
+      text: '',
+      icon: '',
+      bgImage: 'assets/icons/splacebackground_1.png',
+      webLink: ''
+    },
+    apislug: '/action',
+    repos: ['/sunbird-plugins/renderer'],
+    plugins: [
+      {
+        id: 'org.sunbird.iframeEvent',
+        ver: 1,
+        type: 'plugin'
+      },
+      {
+        id: 'org.sunbird.player.endpage',
+        ver: 1.1,
+        type: 'plugin'
+      }
+    ],
+    sideMenu: {
+      showShare: true,
+      showDownload: true,
+      showExit: false
+    },
+    enableTelemetryValidation: false
+  };
 
   @ViewChild('preview', { static: false }) previewElement: ElementRef;
 
@@ -52,14 +92,7 @@ export class InteractivePlayerComponent implements OnInit {
     this.queryParams = this.activatedRoute.snapshot.queryParams;
     this.getContentDetails().pipe(first(),
       tap((data: any) => {
-        if (this.contentDetails){
-          this.playerConfig.metadata = this.contentDetails;
-          this.playerConfig.data = this.contentDetails.body;
-          this.previewElement.nativeElement.contentWindow.location.reload();
-          setTimeout(() => {
-            this.previewElement.nativeElement.contentWindow.initializePreview(this.playerConfig);
-          }, 2000);
-        }
+          this.setContentData();
       }))
       .subscribe((data) => {
         this.isLoading = false;
@@ -70,6 +103,15 @@ export class InteractivePlayerComponent implements OnInit {
           console.log('error --->', error);
         }
       );
+  }
+
+  setContentData(){
+    this.playerConfig = {
+      context: this.configService.playerConfig.INTERACTIVE_PLAYER.context,
+      config: this.config,
+      metadata: this.contentDetails || this.configService.playerConfig.INTERACTIVE_PLAYER.metadata,
+      data: this.contentDetails?.body || this.configService.playerConfig.INTERACTIVE_PLAYER.data
+    };
   }
 
   private getContentDetails() {
@@ -90,16 +132,6 @@ export class InteractivePlayerComponent implements OnInit {
   }
   playerTelemetryEvents(event) {
 
-  }
-
-  onEnter(value) {
-    this.value = JSON.parse(value);
-    this.playerConfig.data = this.value.result.content.body;
-    this.playerConfig.metadata = this.value.result.content;
-    this.previewElement.nativeElement.contentWindow.location.reload();
-    setTimeout(() => {
-      this.previewElement.nativeElement.contentWindow.initializePreview(this.playerConfig);
-    }, 2000);
   }
 
   private isJSON(input): boolean {

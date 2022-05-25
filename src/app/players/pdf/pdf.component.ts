@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { delay, first, mergeMap, tap } from 'rxjs/operators';
 import { HelperService } from 'src/app/services/helper/helper.service';
 import { ConfigService } from 'src/app/services/config/config.service';
+import { NgSwitch } from '@angular/common';
 
 @Component({
   selector: 'app-pdf',
@@ -21,18 +22,14 @@ export class PdfComponent implements OnInit {
   public contentDetails: any;
   playerConfig: any;
   isLoading = true;
-  context =  this.configService.playerConfig.PLAYER_CONTEXT;
-  config = {};
+  config: any;
 
   ngOnInit(): void {
     this.queryParams = this.activatedRoute.snapshot.queryParams;
+    this.setConfig();
     this.getContentDetails().pipe(first(),
       tap((data: any) => {
-        if (this.contentDetails){
           this.loadContent();
-        }else{
-          this.loadDefaultData();
-        }
       }))
       .subscribe((data) => {
         this.isLoading = false;
@@ -40,18 +37,10 @@ export class PdfComponent implements OnInit {
         (error) => {
           this.isLoading = false;
           alert('Error to load pdf, Loading default pdf');
-          this.loadDefaultData();
+          this.loadContent();
           console.log('error --->', error);
         }
       );
-  }
-
-  loadDefaultData(){
-    this.playerConfig = {
-      context: this.context,
-      config: this.config,
-      metadata: this.configService.playerConfig.PDF_PLAYER_METADATA
-    } ;
   }
 
   private getContentDetails() {
@@ -69,11 +58,23 @@ export class PdfComponent implements OnInit {
     }
   }
 
+  setConfig(){
+    this.config = {
+      sideMenu: {
+        showShare: this.queryParams.showShare && this.queryParams.showShare === 'false' ? false : true,
+        showDownload: this.queryParams.showDownload && this.queryParams.showDownload === 'false' ? false : true,
+        showReplay: this.queryParams.showReplay && this.queryParams.showReplay === 'false' ? false : true,
+        showExit: this.queryParams.showExit && this.queryParams.showExit === 'false' ? false : true,
+        showPrint: this.queryParams.showPrint && this.queryParams.showPrint === 'false' ? false : true,
+      }
+    };
+  }
+
   loadContent() {
     this.playerConfig = {
-      context: this.context,
+      context: this.configService.playerConfig.PLAYER_CONTEXT,
       config: this.config,
-      metadata: this.contentDetails
+      metadata: this.contentDetails || this.configService.playerConfig.PDF_PLAYER_METADATA
     };
   }
 
