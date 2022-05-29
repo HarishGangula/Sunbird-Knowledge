@@ -46,6 +46,7 @@
               "src/styles.scss",
               "./node_modules/@project-sunbird/sb-styles/assets/_styles.scss",
               "./node_modules/@project-sunbird/sb-themes/themes/themes-portal.scss",
+              "src/assets/styles/semantic/semantic.min.css",
               "./node_modules/video.js/dist/video-js.min.css",
               "./node_modules/@project-sunbird/sunbird-video-player-v9/lib/assets/videojs.markers.min.css",
               "./node_modules/videojs-http-source-selector/dist/videojs-http-source-selector.css"
@@ -54,11 +55,12 @@
               "node_modules/epubjs/dist/epub.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/video.js/dist/video.js",
+              "src/assets/libs/semantic-ui/modal.min.js",
               "node_modules/@project-sunbird/sunbird-video-player-v9/lib/assets/videojs-markers.js",
               "node_modules/videojs-contrib-quality-levels/dist/videojs-contrib-quality-levels.min.js",
               "node_modules/videojs-http-source-selector/dist/videojs-http-source-selector.min.js",
               "node_modules/izimodal/js/iziModal.min.js"
-              
+
             ]
           },
           "configurations": {

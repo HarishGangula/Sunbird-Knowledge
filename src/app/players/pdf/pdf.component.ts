@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { delay, first, mergeMap, tap } from 'rxjs/operators';
 import { HelperService } from 'src/app/services/helper/helper.service';
 import { ConfigService } from 'src/app/services/config/config.service';
-import { NgSwitch } from '@angular/common';
 
 @Component({
   selector: 'app-pdf',
@@ -21,12 +20,20 @@ export class PdfComponent implements OnInit {
   public queryParams: any;
   public contentDetails: any;
   playerConfig: any;
+  config: any = JSON.parse(localStorage.getItem('pdfConfig')) || {};
+  showShare: any = this.config.sideMenu.showShare || false;
+  showDownload: any = this.config.sideMenu.showDownload || false;
+  showReplay: any = this.config.sideMenu.showReplay || false;
+  showExit: any = this.config.sideMenu.showExit || false;
+  showPrint: any = this.config.sideMenu.showPrint || false;
   isLoading = true;
-  config: any;
+  sidemenuConfig = this.config.sideMenu || false;
+  showSideMenu = false;
+  ShowsharePopup = false;
+
 
   ngOnInit(): void {
     this.queryParams = this.activatedRoute.snapshot.queryParams;
-    this.setConfig();
     this.getContentDetails().pipe(first(),
       tap((data: any) => {
           this.loadContent();
@@ -58,18 +65,6 @@ export class PdfComponent implements OnInit {
     }
   }
 
-  setConfig(){
-    this.config = {
-      sideMenu: {
-        showShare: this.queryParams.showShare && this.queryParams.showShare === 'false' ? false : true,
-        showDownload: this.queryParams.showDownload && this.queryParams.showDownload === 'false' ? false : true,
-        showReplay: this.queryParams.showReplay && this.queryParams.showReplay === 'false' ? false : true,
-        showExit: this.queryParams.showExit && this.queryParams.showExit === 'false' ? false : true,
-        showPrint: this.queryParams.showPrint && this.queryParams.showPrint === 'false' ? false : true,
-      }
-    };
-  }
-
   loadContent() {
     this.playerConfig = {
       context: this.configService.playerConfig.PLAYER_CONTEXT,
@@ -78,8 +73,18 @@ export class PdfComponent implements OnInit {
     };
   }
 
-  playerEvents(event) {
+  close() {
+    this.ShowsharePopup = false;
+  }
 
+  enableSideMenu(){
+    this.showSideMenu = true;
+  }
+
+  playerEvents(event) {
+    if (event.edata.type === 'SHARE') {
+      this.ShowsharePopup = true;
+    }
   }
   playerTelemetryEvents(event) {
 

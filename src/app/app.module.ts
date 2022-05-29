@@ -18,6 +18,10 @@ import { QuestionCursor, QumlLibraryModule } from '@project-sunbird/sunbird-quml
 import { QuestionCursorImplementationService } from './services/question-cursor-implementation.service';
 import { CollectionEditorComponent } from './editors/collection-editor/collection-editor.component';
 import { ContentlistComponent } from './editors/contentlist/contentlist.component';
+import { FormsModule } from '@angular/forms';
+import { SuiModalModule } from 'ng2-semantic-ui-v9';
+import { SnPopupComponent } from './sn-popup/sn-popup.component';
+import { SidebarComponent } from './players/sidebar/sidebar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +34,9 @@ import { ContentlistComponent } from './editors/contentlist/contentlist.componen
     InteractivePlayerComponent,
     VideoComponent,
     CollectionEditorComponent,
-    ContentlistComponent
+    ContentlistComponent,
+    SnPopupComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,9 @@ import { ContentlistComponent } from './editors/contentlist/contentlist.componen
     SunbirdPdfPlayerModule,
     SunbirdEpubPlayerModule,
     SunbirdVideoPlayerModule,
-    QumlLibraryModule
+    QumlLibraryModule,
+    FormsModule,
+    SuiModalModule
   ],
   providers: [{
     provide: QuestionCursor,

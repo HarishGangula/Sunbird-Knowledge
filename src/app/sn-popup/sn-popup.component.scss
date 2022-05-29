@@ -1,0 +1,15 @@
+.sn-modal-content{
+  padding: 16px;
+  max-height: 400px;
+  min-height: 100px;
+  background: var(--mat-modal-content-bg);
+  color: var(--mat-modal-content-txt);
+  overflow-y: auto;
+}
+
+.sn-modal-header{
+  display: flex;
+  align-items: center;
+  padding: 4px 16px;
+  min-height: 40px;
+}

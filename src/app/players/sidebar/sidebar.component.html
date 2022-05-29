@@ -1,0 +1,32 @@
+<div class="overlay-sidebar"  *ngIf="showSideMenu">
+  <div class="overlay-sidebar__menu" tabindex="0" role="dialog" id="overlaySidebarID" aria-labelledby="dialog1_label" aria-modal="true" aria-label="open sidebar navigation">
+    <div class="profile__info">
+      <em class="icon-svg icon-svg--xs icon-close" role="button" aria-label="Close sidebar navigation" title="Close sidebar" tabindex="0"
+        (click)="toggleSideMenu(false)">
+        <svg class="icon icon-svg--gray">
+          <use xlink:href="./assets/images/sprite.svg#close"></use>
+        </svg>
+      </em>
+    </div>
+    <h1 class="ui header slider-header">Settings</h1>
+    <ng-container>
+      <table class="ui very basic collapsing celled table pl-10 pt-10 pr-10 pb-10">
+        <tbody>
+          <tr *ngFor="let item of sidemenuConfig | keyvalue; let i = index"><td>{{item.key | uppercase}}</td>
+            <td>
+              <div class="sb-field">
+                  <label class="switch">
+                  <input type="checkbox" [(ngModel)]="sidemenuConfig[item.key]">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="sb-field">
+        <button type="button" class="sb-btn sb-btn-normal" (click)="onEnter()">Submit</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

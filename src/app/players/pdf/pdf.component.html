@@ -13,8 +13,8 @@
 <div class ='sbt-inside-page-container'>
   <div *ngIf="isLoading">Loading.....</div>
   <div class="relative9">
-      <!-- CC-Player Video -->
-      <div class="sb-single-resource player-maxwidth">
+    <!-- CC-Player Video -->
+    <div class="sb-single-resource player-maxwidth">
       <div class="ui container">
           <div class="cc-player sb-g">
             <section class="sb-g-col-xs-12 sb-g-col-md-12 sb-g-col-lg-12 sb-g-col-xxxl-16 cc-player__video" id="player-area-height">
@@ -27,6 +27,12 @@
             </section>
           </div>
       </div>
-  </div>
+    </div>
+
   </div>
 </div>
+
+<app-sn-popup [ShowsharePopup]="ShowsharePopup" (close)="close()"></app-sn-popup>
+
+<div><button class="sb-btn sb-btn-normal sb-btn-primary setting-btn" (click)="enableSideMenu()">Settings</button></div>
+<app-sidebar [sidemenuConfig]="sidemenuConfig" [configFor]="'pdfConfig'" [showSideMenu]="showSideMenu"></app-sidebar>

@@ -1,0 +1,32 @@
+<sui-modal
+[isClosable]="true"
+[transitionDuration]="0"
+[size]="'small'"
+class="sb-modal"
+(dismissed)="closeModel()"
+*ngIf="ShowsharePopup"
+#modal
+>
+  <!--Header-->
+  <div mat-dialog-title class="mb-0 sn-modal-header">
+   <div class="title" role="heading">
+     Share link
+   </div>
+ </div>
+  <!--/Header-->
+
+  <!--Content-->
+  <div class="sn-modal-content">
+   <p class="mb-8">
+     Share using the link
+   </p>
+   <div class="ui action input fluid" id="buttonPopUp" suiPopup popupText="text">
+     <input type="text" name="title" readonly [(ngModel)]="shareLink" aria-label="copy link data"
+     class="sb-form-control" #copyLinkData/>
+     <button class="ui basic primary button" tabindex="0" (click)="copyLink(copyLinkData)" #copyLinkButton>
+           Copy Link
+         </button>
+   </div>
+ </div>
+  <!--/Content-->
+ </sui-modal>
